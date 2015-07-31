@@ -39,17 +39,52 @@
 </div>
  
 <script>
+  var arr = [{name: "nick", age:"19", country: "usa" }, {name: "nick", age:"19", country:"japan" }, {name: "nick", age:"19", country: "england" }]
+       var  bigstring = "";
+$(window).load(function(event){
+
+    var booboo = function(arr, event) {
+
+        var s = arr.length;
+        var splitter = function(l, event) { 
+var condition = ''
+condition +=  '(' + l + '+1)*((' + $(window).width() + ')/' + s + ') >' + "placeholder" + '>(' + l + '*(' + $(window).width() + '/' + s + '))'
+return condition + ""
+        }
+
+        arr.forEach(function(element, index, array){
+          if (index === 0) {
+           bigstring += 'if (' + splitter(index, event) + ') { ' + 'console.log("' + element.country + '")}'
+} else {
+          bigstring += 'else if (' + splitter(index, event) + ') { ' + 'console.log("' + element.country + '")}'
+}
+        });
+
+
+
+    }
+              booboo(arr, event);
+
+})
+
+var  makeItHappen =  function(e) {
+  var x = e.pageX + ""
+                     var temp = bigstring.replace(/\b(placeholder)\b/gi, x)
+console.log(temp)
+eval(temp)
+
+}
+     
+
+
+
 	$( "#fullscreen" ).mousemove(function( event ) {
 	  var pageCoords = "( " + event.pageX + ", " + event.pageY + " )";
 	  $( "span:first" ).text( "( event.pageX, event.pageY ) : " + pageCoords );
-		
-		if (event.pageX > $( window ).width() / 2){
-			$('#fullscreen').css("background-color", "blue");
-		}else{
-			$('#fullscreen').css("background-color", "green");
-		};
+                   makeItHappen(event)
+		});
 
-	});
+// NOTE: WHERE YOU LEFT OFF YOU WERE GETTING THE PROPER RESPONSE FOR THE FIRST THIRD OF THE SCREEN BUT NOT THE OTHER THIRDS.
 </script>
  
 </body>
